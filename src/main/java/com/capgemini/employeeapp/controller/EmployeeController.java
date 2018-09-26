@@ -64,4 +64,22 @@ public class EmployeeController {
 		employeeService.updateEmployee(employee);
 		return "redirect:/findAllEmployees";
 	}
+	
+	
+	@RequestMapping(value = "/findEmployeePage", method = RequestMethod.GET)
+	public String getEmployeeById(Model model) {
+		model.addAttribute("employee", new Employee());
+		return "searchEmployee";
+	}
+
+	@RequestMapping(value = "/searchEmployee", method = RequestMethod.POST)
+	public String getEmployee(@ModelAttribute Employee employee,Model model) {
+		Employee emp = employeeService.findEmployeeById(employee.getEmployeeId());
+		model.addAttribute("employee", emp);
+		return "employeeById";
+	}
+
+	
+	
+	
 }
